@@ -6,6 +6,7 @@ public class Car : MonoBehaviour
 {
     public float accelaration = 1;
     public float steering = 1;
+    public bool drifting = false;
     private Rigidbody rigid;
 
     // Start is called before the first frame update
@@ -22,8 +23,11 @@ public class Car : MonoBehaviour
         rigid.AddForce(transform.forward * verticalInput * accelaration * Time.deltaTime);
         transform.Rotate(Vector3.up, horizontalInput * steering * Time.deltaTime);
 
-        Vector3 velocity = rigid.velocity;
-        velocity = transform.forward * velocity.magnitude;
-        rigid.velocity = velocity;
+        if(drifting == false)
+        {
+            Vector3 velocity = rigid.velocity;
+            velocity = transform.forward * velocity.magnitude;
+            rigid.velocity = velocity;
+        }
     }
 }
